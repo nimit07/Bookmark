@@ -24,7 +24,7 @@ class BooksPerBranch(models.Model):
         return dictionary
 
     def load_from_dict(self, updates):
-        for field, value in updates.items():
+        for field, value in updates.iteritems():
             if hasattr(self, field):
                 self.__setattr__(field, value)
 

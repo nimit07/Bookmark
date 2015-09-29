@@ -15,7 +15,7 @@ class BookPerBranchView(View):
             try:
                 branch_data = BooksPerBranchApi.get(branch)
                 response = branch_data.to_dict()
-                return JsonResponse(json.dumps(response), safe=False)
+                return JsonResponse(response, safe=False)
             except Exception as e:
                 return HttpResponse(e)
 
@@ -68,21 +68,22 @@ class BookPerBranchView(View):
             try:
                 branch_data = BooksPerBranchApi.update(branch, data)
                 response = branch_data.to_dict()
-                return JsonResponse(json.dumps(response), safe=False)
+                return JsonResponse(response, safe=False)
             except Exception as e:
                 raise e
         else:
             return HttpResponse('null')
 
-    def delete(self, **kwargs):
+    def delete(self, request, **kwargs):
 
         if kwargs.get('branch', None) is not None:
             branch = kwargs.get('branch')
+            print branch
 
             try:
                 branch_data = BooksPerBranchApi.delete(branch)
                 response = branch_data.to_dict()
-                return JsonResponse(json.dumps(response), safe=True)
+                return JsonResponse(response, safe=True)
             except Exception as e:
                 return e
         else:
@@ -98,7 +99,7 @@ class FieldView(View):
             try:
                 field_data = FieldListApi.get(field)
                 response = field_data.to_dict()
-                return JsonResponse(json.dumps(response), safe=True)
+                return JsonResponse(response, safe=True)
             except Exception as e:
                 raise e
 
@@ -149,13 +150,13 @@ class FieldView(View):
             try:
                 field_data = FieldListApi.update(branch, data)
                 response = field_data.to_dict()
-                return JsonResponse(json.dumps(response), safe=False)
+                return JsonResponse(response, safe=False)
             except Exception as e:
                 raise e
         else:
             pass
 
-    def delete(self, **kwargs):
+    def delete(self, request,  **kwargs):
 
         if kwargs.get('field', None) is not None:
             field = kwargs.get('field')
@@ -163,7 +164,7 @@ class FieldView(View):
             try:
                 field_data = FieldListApi.delete(field)
                 response = field_data.to_dict()
-                return JsonResponse(json.dumps(response), safe=True)
+                return JsonResponse(response, safe=True)
             except Exception as e:
                 return e
         else:

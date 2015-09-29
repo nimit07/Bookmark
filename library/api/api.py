@@ -44,12 +44,12 @@ class BooksPerBranchApi(object):
             raise e
 
     @classmethod
-    def update(cls, branch, data):
+    def update(cls, branch, data, **kwargs):
 
         try:
             branch_books = BooksPerBranch.objects.get(branch=branch)
 
-            branch_books.load_from_dict(**data)
+            branch_books.load_from_dict(data)
             branch_books.save()
             return branch_books
 
@@ -99,12 +99,12 @@ class FieldListApi(object):
             print 'Field not found'
 
     @classmethod
-    def update(cls, field, data):
+    def update(cls, field, data, **kwargs):
 
         try:
             field_list = FieldList.objects.get(field=field)
 
-            field_list.load_from_dict(**data)
+            field_list.load_from_dict(data)
             field_list.save()
             return field_list
 
@@ -154,12 +154,12 @@ class BooksListApi(object):
             print 'Book not found'
 
     @classmethod
-    def update(cls, title, data):
+    def update(cls, title, data, **kwargs):
 
         try:
             _list = BookList.objects.get(title=title)
 
-            _list.load_from_dict(**data)
+            _list.load_from_dict(data)
             _list.save()
             return _list
 
